@@ -6,7 +6,7 @@ let player = {
 }
 
 let item = {
-    modifier: 1.5,
+    modifier: 2,
     amount: 2
 }
 
@@ -20,13 +20,8 @@ let enemy = {
     ]
 }
 
+let hit = 0;
 let actTurn = 0;
-
-let enHealth = document.getElementById('en-health')
-let plHealth = document.getElementById('pl-health')
-let plGuard = document.getElementById('pl-guard')
-let amount = document.getElementById('amount')
-let plSpecialty = document.getElementById('special-bar')
 
 enHealth.innerText = enemy.health.toString();
 plHealth.innerText = player.health.toString();
@@ -35,43 +30,55 @@ plSpecialty.innerText = player.specialty.toString();
 
 amount.innerText = item.amount.toString();
 
-function draw() {
-    
+function cycle() {
+    if (player.health <= 0 || enemy.health <=0) {
+        document.getElementById('slap').disabled = true;
+        document.getElementById('special').disabled = true;
+        document.getElementById('item').disabled = true;
+        document.getElementById('guard').disabled = true;
+    } else {
+        document.getElementById('en-health').innerText = enemy.health;
+        document.getElementById('pl-health').innerText = player.health;
+        document.getElementById('pl-guard').innerText = player.guard;
+        document.getElementById('special-bar').innerText = player.specialty;
+        document.getElementById('amount').innerText = item.amount;
+    }
 }
 
 function slap() {
     var attack = enemy.health - player.attack;
-    if (enemy.attack[3] || enemy.attack[4]) {
-        enemy.guard - player.attack;
-    }
     enemy.health = attack;
-    enHealth.innerText = enemy.health.toString();
-    draw();
+    hit ++;
+    cycle();
 }
 
 function specialAct() {
-    if (enemy.attack[3] || enemy.attack[4]) {
-        enemy.health - Math.floor(player.attack * 0.75);
+    var sp = enemy.health - Math.floor(player.attack * Math.floor(Math.random() * (4 - 2)));
+    if (player.specialty <= 0) {
+        document.getElementById('special').disabled = true;
     }
-    enemy.health - Math.floor(player.attack * Math.floor(Math.random() * (4 - 2)));
-    draw();
+    enemy.health = sp;
+    hit ++;
+    cycle();
 }
 
 function plItem() {
     var item = player.attack * item.modifier;
-    if (item.amount == 0) {
-        item.amount = item.amount + 0;
+    if (item.amount <= 0) {
+        document.getElementById('item').disabled = true;
     } else {
-    item.amount = item.amount --;
+    item.amount --;
     player.attack = item; 
     }
-    draw();
+    cycle();
 }
 
 function guard() {
-    if (player.guard = 0) {
-        return null;
+    if (player.guard == 0) {
+        document.getElementById('guard').disabled = true;
     }
     var block = player.guard - enemy.attack
-    draw();
+    cycle();
 }
+
+cycle()
