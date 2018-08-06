@@ -24,6 +24,8 @@ let actTurn = 0;
 let spclIndex = ['backhand', 'palm', 'pinch nose']
 let itemIndex = ['muscle tonic']
 
+document.getElementById('enHealth').innerText = player.health.toString()
+
 let enHealth = document.getElementById('enHealth')
 let plHealth = document.getElementById('plHealth')
 const slct1 = document.getElementById('slap')
@@ -36,79 +38,14 @@ function values () {
     plHealth.innerText = player.health.toString();
 }
 
-function turn () {
-    for ( let i = 0 ; i <= 2; i++) {
-        if (i = 0) {
-            return ;
-        }
-        if (i - 0) {
-
-        }
-    }
-
-}
-
 function slap() {
     if (enemy.attack[3] || enemy.attack[4]) {
-        enHealth1 - Math.floor(player.attack * 0.75);
+        enemy.health - Math.floor(player.attack * 0.75);
     }
     enemy.health - player.attack;
 }
 
-function special() {
-    let type = spclIndex[Math.random() * (3 - 0) + 0];
-    if (enemyIndex[0]) {
-        plHealth - Math.random() * (2 - 0) + 0;
-    }
-    if (enemyIndex[1]) {
-        plHealth - Math.random() * (7 - 3) + 3;
-    }
-    if (enemyIndex[2]) {
-        plHealth - Math.random() * (12 - 8) + 3;
-    }
-    if (enemyIndex[3]) {
-
-    }
-}
-
-function item() {
-    let type = spclIndex[Math.random() * (3 - 0) + 0];
-    if (enemyIndex[0]) {
-        plHealth - Math.random() * (2 - 0) + 0;
-    }
-    if (enemyIndex[1]) {
-        plHealth - Math.random() * (7 - 3) + 3;
-    }
-    if (enemyIndex[2]) {
-        plHealth - Math.random() * (12 - 8) + 8;
-    }
-    if (enemyIndex[3]) {
-
-    }
-}
-
-function enemyTurn() {
-    let type = spclIndex[Math.random() * (3 - 0) + 0];
-    if (enemyIndex[0]) {
-        plHealth - Math.random() * (2 - 0) + 0;
-    }
-    if (enemyIndex[1]) {
-        plHealth - Math.random() * (7 - 3) + 3;
-    }
-    if (enemyIndex[2]) {
-        plHealth - Math.random() * (12 - 8) + 3;
-    }
-    if (enemyIndex[3]) {
-
-    }
-    return type;
-}
-
-function menu () {
-
-}
-
-if (enHealth1 == 0 || plHealth == 0) {
+if (enemy.health == 0 || player.health == 0) {
     slct1.disabled = true;
     slct2.disabled = true;
     slct3.disabled = true;
