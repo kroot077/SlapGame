@@ -22,8 +22,8 @@
         <div class="row">
             <div class="col-sm-8 offset-md-2 d-flex justify-content-center">
                 <div>
-                    <p>Health: <span id="en-health">_</span> </p>
-                    <p>Hit: <span id="hits">_</span> </p>
+                    <p>Health: <span id="en-health">150</span> </p>
+                    <p>Hit: <span id="hits">0</span> </p>
                 </div>
                 <div>
                     <img id="gentleman" src="assets/dandy+man+vintage+image+GraphicsFairy.jpg" alt="dandy">
@@ -33,9 +33,9 @@
 
         <div class="row">
             <div class="col-sm-6 offset-md-3 d-flex justify-content-around">
-                <p>Health: <span id="pl-health">_</span> </p>
-                <p>Guard: <span id="pl-guard">_</span> </p>
-                <p>Special: <span id="special-bar">_</span> </p>
+                <p>Health: <span id="pl-health">100</span> </p>
+                <p>Guard: <span id="pl-guard">15</span> </p>
+                <p>Special: <span id="special-bar">30</span> </p>
             </div>
             <div class="col-sm-6"></div>
         </div>
@@ -43,9 +43,23 @@
         <footer class="row">
             <div class="col-sm-12 d-flex justify-content-center">
                 <button onClick="slap()" id="slap">Slap</button>
-                <button onClick="specialAct()" id="special">Specialty</button>
-                <button onClick="plItem()" id="item">Items: <span id="amount">_</span></button>
+                <button onClick="backHand()" id="backhand">Back Hand</button>
+                <button onClick="paddler()" id="paddler">Paddler</button>
                 <button onClick="guard()" id="guard">Guard</button>
+            </div>
+        </footer>
+
+        <footer class="row">
+            <div class="col-sm-12 d-flex justify-content-center">
+                <button onClick="plMuscle()" id="tonic">Muscle Tonic: <span id="amount">1</span></button>
+                <button onClick="plProtein()" id="protein">Protein Drink: <span id="amount2">2</span></button>
+                <button onClick="plMilk()" id="milk">Milk: <span id="amount3">2</span></button>
+            </div>
+        </footer>
+
+        <footer class="row">
+            <div class="col-sm-12 d-flex justify-content-center mt-1">
+                <button onClick="resetBtn()" id="reset">Reset</button>
             </div>
         </footer>
 

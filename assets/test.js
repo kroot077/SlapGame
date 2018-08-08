@@ -1,12 +1,12 @@
 let player = {
     health: 100,
     specialty: 30,
-    guard: 15,
+    guard: 25,
     attack: 3
 }
 
 let tonic = {
-    modifier: 3,
+    modifier: 2,
     amount: 1
 }
 
@@ -21,7 +21,9 @@ let milk = {
 }
 
 let enemy = {
-    health: 150,
+    health: 75,
+    specialty: 20,
+    guard: 25,
     attacks: ['slap1', 'slap2', 'slap3', 'slap4', 'slap5', 'wallop'],
     appearance: [
         'dandy-man-vintage-image-GraphicsFairy.jpg',
@@ -29,9 +31,10 @@ let enemy = {
 }
 
 let hit = 0;
+let actTurn = 0;
 
 function cycle() {
-    if (player.health <= 0 || enemy.health <= 0) {
+    if (player.health <= -10 || enemy.health <= -10) {
         document.getElementById('slap').disabled = true;
         document.getElementById('special').disabled = true;
         document.getElementById('paddler').disabled = true;
@@ -39,6 +42,8 @@ function cycle() {
         document.getElementById('tonic').disabled = true;
         document.getElementById('protein').disabled = true;
         document.getElementById('milk').disabled = true;
+        player.health = 0;
+        enemy.health = 0;
     } else {
         document.getElementById('hits').innerText = hit.toString();
         document.getElementById('en-health').innerText = enemy.health.toString();
@@ -74,51 +79,7 @@ function slap() {
     hit ++;
     enAction();
     cycle();
-}
-//tests correctly
-
-function backHand() {
-    var sp = enemy.health - Math.floor(player.attack * Math.floor(Math.random() * (4 - 2) + 2));
-    var spDown = player.specialty - 6;
-    if (player.specialty <= 0) {
-        document.getElementById('special').disabled = true;
-    } else {
-        enemy.health = sp;
-        player.specialty = spDown;
-        hit ++;       
-    } 
-    enAction();
-    cycle();
-}
-//tests correctly
-
-function paddler() {
-    var paddle = Math.floor(player.attack * Math.floor(Math.random() * (3 - 1) + 1));
-    var spDown = player.specialty - 12;
-    if (player.specialty <= 0) {
-        document.getElementById('special').disabled = true;
-    } else {
-        player.specialty = spDown
-        for (let i = 0 ; i <= 3 ; i++) {
-            enemy.health = enemy.health - paddle;
-            hit ++;
-        }
-    }
-    enAction();
-    cycle();
-}
-
-function guard() {
-    var block = player.guard - 5;
-    var health = player.health + 10;
-    if (player.guard <= 0) {
-        document.getElementById('guard').disabled = true;
-    } else {
-        player.guard = block;
-        player.health = health;
-    }
-    cycle();
-}
+} 
 
 function plMuscle() {
     var muscle = Math.floor(player.attack) * Math.floor(tonic.modifier);
@@ -158,18 +119,3 @@ function plMilk() {
     enAction();
     cycle();
 }
-
-function resetBtn() {
-    player.health = 100;
-    player.specialty = 30;
-    player.guard = 15;
-    player.attack = 3;
-    tonic.amount = 1;
-    protein.amount = 2;
-    milk.amount = 2;
-    enemy.health = 150;
-    hit = 0;
-    cycle();
-}
-
-cycle();
