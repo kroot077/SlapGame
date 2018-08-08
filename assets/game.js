@@ -2,7 +2,7 @@ let player = {
     health: 100,
     specialty: 30,
     guard: 15,
-    attack: 3
+    attack: 4
 }
 
 let tonic = {
@@ -11,27 +11,35 @@ let tonic = {
 }
 
 let protein = {
-    modifier: 10,
+    modifier: 15,
     amount: 2
 }
 
 let milk = {
-    modifier: 5,
+    modifier: 10,
     amount: 2
 }
 
 let enemy = {
-    health: 150,
-    attacks: ['slap1', 'slap2', 'slap3', 'slap4', 'slap5', 'wallop'],
-    appearance: [
-        'dandy-man-vintage-image-GraphicsFairy.jpg',
-    ]
+    health: 120,
+    attacks: ['slap1', 'slap2', 'slap3', 'slap4', 'slap5', 'wallop']
 }
 
 let hit = 0;
 
 function cycle() {
-    if (player.health <= 0 || enemy.health <= 0) {
+    if (player.health <= 0) {
+        document.getElementById('pl-health').innerText = 'KO';
+        document.getElementById('slap').disabled = true;
+        document.getElementById('special').disabled = true;
+        document.getElementById('paddler').disabled = true;
+        document.getElementById('guard').disabled = true;
+        document.getElementById('tonic').disabled = true;
+        document.getElementById('protein').disabled = true;
+        document.getElementById('milk').disabled = true;
+    }
+    else if (enemy.health <= 0) {
+        document.getElementById('en-health').innerText = 'KO';
         document.getElementById('slap').disabled = true;
         document.getElementById('special').disabled = true;
         document.getElementById('paddler').disabled = true;
@@ -163,11 +171,11 @@ function resetBtn() {
     player.health = 100;
     player.specialty = 30;
     player.guard = 15;
-    player.attack = 3;
+    player.attack = 4;
     tonic.amount = 1;
     protein.amount = 2;
     milk.amount = 2;
-    enemy.health = 150;
+    enemy.health = 120;
     hit = 0;
     cycle();
 }
